@@ -4,33 +4,23 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-void create_zombie() {
-	
-	pid_t pids[10];
-	int i;
-	
-	for(i = 9; i >= 0; i--){
-	
-		pids[i] = fork();
-		if (pids[i] == 0) {
-			sleep(i+1);
-			_exit(0);
-		}
 
-	}
+void create_zombie() {
+	/* TODO: Implement child process and kill it */
 	
-	for (i = 9; i >= 0; --i){
-		waitpid(pids[i], NULL, 0);
-	}
+	pid_t child = fork();
+	kill(child, SIGKILL);
 	
-	return;
+	
+	//return;
 }
 
 int main(void)
 {
 	int wait = 15;
 	/* TODO: implement */
-
 	create_zombie();
+	sleep(wait);
+
 	return 0;
 }
